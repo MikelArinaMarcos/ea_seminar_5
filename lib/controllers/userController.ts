@@ -40,6 +40,8 @@ export class UserController {
                 const user_filter = { _id: req.params.id };
                 // Fetch user
                 const user_data = await this.user_service.populateUserPosts(user_filter);
+                // Fetch user
+                const user_data_b = await this.user_service.populateUserReviews(user_filter);
                 // Send success response
                 return res.status(200).json({ data: user_data, message: 'Successful'});
             } else {

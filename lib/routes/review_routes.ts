@@ -7,7 +7,7 @@ export class ReviewRoutes {
 
     public route(app: Application) {
         
-        app.review('/review', (req: Request, res: Response) => {
+        app.post('/review', (req: Request, res: Response) => {
             this.post_controller.createReview(req, res);
         });
 

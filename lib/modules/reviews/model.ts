@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export interface IReviews {
+export interface IReview {
     title: String;
     content: String;
     stars_number: Number;

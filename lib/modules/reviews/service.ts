@@ -1,5 +1,6 @@
 import { IReview } from './model';
 import reviews from './schema';
+import { Types } from 'mongoose';
 
 export default class PostService {
     

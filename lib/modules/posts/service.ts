@@ -1,5 +1,6 @@
 import { IPost } from './model';
 import posts from './schema';
+import { Types } from 'mongoose';
 
 export default class PostService {
     

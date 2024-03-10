@@ -3,7 +3,6 @@ import users from './schema';
 import { Types } from 'mongoose';
 
 export default class UserService {
-    
     public async createUser(user_params: IUser): Promise<IUser> {
         try {
             const session = new users(user_params);
@@ -78,4 +77,39 @@ export default class UserService {
         }
     }
 
+    public async addReviewToUser(userId: Types.ObjectId, reviewId: Types.ObjectId): Promise<void> {
+        try {
+            // Retrieve the user document by ID
+            const user = await users.findById(userId);
+            if (!user) {
+                throw new Error('User not found');
+            }
+
+            // Add the review ID to the user's array of reviews
+            user.reviews.push(reviewId);
+
+            // Save the updated user document
+            await user.save();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async populateUserReviews(query: any): Promise<IUser | null> {
+        try {
+            // Find the user document and populate the 'posts' field
+            const user = await users.findOne(query).populate('reviews').exec();
+            if (!user) {
+                return null;
+            }
+            // Convert _id to string
+            const populatedUser: IUser = {
+                ...user.toObject(),
+                _id: user._id.toString()
+            };
+            return populatedUser;
+        } catch (error) {
+            throw error;
+        }
+    }
 }

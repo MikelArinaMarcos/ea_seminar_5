@@ -6,7 +6,7 @@ import e = require('express');
 
 export class ReviewController {
 
-    private post_service: ReviewService = new ReviewService();
+    private review_service: ReviewService = new ReviewService();
     private user_service: UserService = new UserService();
 
     public async createReview(req: Request, res: Response) {
@@ -19,9 +19,9 @@ export class ReviewController {
                     stars_number: req.body.stars_number,
                     author: req.body.author
                 };
-                const post_data = await this.post_service.createReview(post_params);
+                const review_data = await this.review_service.createReview(post_params);
                  // Now, you may want to add the created review's ID to the user's array of reviews
-                await this.user_service.addReviewToUser(req.body.author, post_data._id); //
+                await this.user_service.addReviewToUser(req.body.author, review_data._id); //
                 return res.status(201).json({ message: 'Review created successfully', review: review_data });
             }else{            
                 return res.status(400).json({ error: 'Missing fields' });
@@ -57,7 +57,7 @@ export class ReviewController {
                     return res.status(200).json({ message: 'Successful'});
                 } else {
                     // Send failure response if user not found
-                    return res.status(400).json({ error: 'Review not found' });
+                    return res.status(400).json({ error: ' not found' });
                 }
             } else {
                 // Send error response if ID parameter is missing
