@@ -2,7 +2,7 @@ import { IReview } from './model';
 import reviews from './schema';
 import { Types } from 'mongoose';
 
-export default class PostService {
+export default class ReviewService {
     
     public async createReview(post_params: IReview): Promise<IReview> {
         try {
